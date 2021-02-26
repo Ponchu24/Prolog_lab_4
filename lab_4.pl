@@ -43,3 +43,8 @@ pr4_8:-write("kol-vo = "),read(N),read_list(N,List),min_list_down(List,Min),writ
 %9
 in_list([H|_],H):-!.
 in_list([_|T],El):-in_list(T,El).
+
+%10
+swap_list([H|T],Res_list):-swap_list([H|T],[],Res_list).
+swap_list([],Cur_list,Cur_list):-!.
+swap_list([H|T],Cur_list,Res_list):-swap_list(T,[H|Cur_list],Res_list).
