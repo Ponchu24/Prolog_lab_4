@@ -23,3 +23,7 @@ list_el_numb([_|T],El,I,Num):-I1 is I+1,list_el_numb(T,El,I1,Num).
 
 pr4_4:-write("kol-vo = "),read(N),read_list(N,List),write("Elem = "),read(El),list_el_numb(List,El,Num),write("Number = "),write(Num),write("."),!.
 pr4_4:-write("Nope.").
+
+%5
+pr4_5:-write("kol-vo = "),read(N),read_list(N,List),write("Num = "),read(Num),list_el_numb(List,El,Num),write("Elem = "),write(El),write("."),!.
+pr4_4:-write("Nope.").
