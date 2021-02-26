@@ -58,3 +58,9 @@ p([SH|ST],[Cur_SH|Cur_ST],[LH|LT]):-(Cur_SH=LH -> p([SH|ST],Cur_ST,LT);SH=Cur_SH
 %12
 del_num([_|T],0,T):-!.
 del_num([H|T],N,[H|T1]):-N1 is N-1,del_num(T,N1,T1).
+
+%13
+del_all([],_,[]):-!.
+del_all([H|T],El,[H|T1]):-H\=El,del_all(T,El,T1),!.
+del_all([_|T],El,T1):-del_all(T,El,T1).
+
