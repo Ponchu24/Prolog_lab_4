@@ -11,3 +11,7 @@ sum_list_down([],S,S):-!.
 sum_list_down([H|T],Current_sum,Sum):-S1 is Current_sum+H,sum_list_down(T,S1,Sum).
 
 pr4_2:-write("kol-vo: "),read(N),read_list(N,List),sum_list_down(List,Sum),write(Sum).
+
+%3
+sum_list_up([],0):-!.
+sum_list_up([H|T],Sum):-sum_list_up(T,Sum1),Sum is H+Sum1.
