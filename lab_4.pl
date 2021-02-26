@@ -77,3 +77,7 @@ count([H|T],El,Res):-count([H|T],El,0,Res),!.
 count([],_,I,I):-!.
 count([H|T],El,I,Res):-(H\=El -> count(T,El,I,Res);I1 is I+1,count(T,El,I1,Res)).
 
+%17
+lenght([_|T],Res):-lenght([_|T],0,Res).
+lenght([],I,I):-!.
+lenght([_|T],I,Res):-I1 is I+1,lenght(T,I1,Res).
