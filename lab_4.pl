@@ -48,3 +48,10 @@ in_list([_|T],El):-in_list(T,El).
 swap_list([H|T],Res_list):-swap_list([H|T],[],Res_list).
 swap_list([],Cur_list,Cur_list):-!.
 swap_list([H|T],Cur_list,Res_list):-swap_list(T,[H|Cur_list],Res_list).
+
+%11
+p(Sublist,List):-p(Sublist,Sublist,List).
+p(_,[],_):-!.
+p(_,Sublist,List):-Sublist=List,!.
+p([SH|ST],[Cur_SH|Cur_ST],[LH|LT]):-(Cur_SH=LH -> p([SH|ST],Cur_ST,LT);SH=Cur_SH,p([SH|ST],[Cur_SH|ST],LT)).
+
