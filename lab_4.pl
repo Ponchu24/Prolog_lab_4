@@ -26,4 +26,8 @@ pr4_4:-write("Nope.").
 
 %5
 pr4_5:-write("kol-vo = "),read(N),read_list(N,List),write("Num = "),read(Num),list_el_numb(List,El,Num),write("Elem = "),write(El),write("."),!.
-pr4_4:-write("Nope.").
+pr4_5:-write("Nope.").
+
+%6
+min_list_up([H],H):-!.
+min_list_up([H|T],Min):-min_list_up(T,Min1),(H<Min1 -> Min is H;Min is Min1).
