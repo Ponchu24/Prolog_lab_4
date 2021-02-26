@@ -81,3 +81,8 @@ count([H|T],El,I,Res):-(H\=El -> count(T,El,I,Res);I1 is I+1,count(T,El,I1,Res))
 lenght([_|T],Res):-lenght([_|T],0,Res).
 lenght([],I,I):-!.
 lenght([_|T],I,Res):-I1 is I+1,lenght(T,I1,Res).
+
+%18_1
+p18_1:-write("Kol-vo = "),read(N),read_list(N,List),p18_1(List),!.
+p18_1([H|T]):-count([H|T],H,Kol),(Kol \= 1 -> del_all([H|T],H,Res),list_el_numb(Res,El,0);El is H),p18_1(El).
+p18_1(El):-write("Result = "),write(El).
