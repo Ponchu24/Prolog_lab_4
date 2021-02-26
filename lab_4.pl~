@@ -36,3 +36,6 @@ min_list_up([H|T],Min):-min_list_up(T,Min1),(H<Min1 -> Min is H;Min is Min1).
 min_list_down([H|T],Min):-min_list_down(T,Min,H),!.
 min_list_down([],Min,Min):-!.
 min_list_down([H|T],Min,Cur_min):-(H<Cur_min -> min_list_down(T,Min,H);min_list_down(T,Min,Cur_min)).
+
+%8
+pr4_8:-write("kol-vo = "),read(N),read_list(N,List),min_list_down(List,Min),write("Min = "),write(Min).
