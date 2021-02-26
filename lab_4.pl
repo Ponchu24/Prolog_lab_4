@@ -71,3 +71,9 @@ only_one([H|T]):-del_num([H|T],0,Res),not(in_list(Res,H)),only_one(Res).
 %15
 make_only_one([],[]):-!.
 make_only_one([H|T],[H|T1]):-del_all([H|T],H,Res1),make_only_one(Res1,T1).
+
+%16
+count([H|T],El,Res):-count([H|T],El,0,Res),!.
+count([],_,I,I):-!.
+count([H|T],El,I,Res):-(H\=El -> count(T,El,I,Res);I1 is I+1,count(T,El,I1,Res)).
+
