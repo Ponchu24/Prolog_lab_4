@@ -15,3 +15,11 @@ pr4_2:-write("kol-vo: "),read(N),read_list(N,List),sum_list_down(List,Sum),write
 %3
 sum_list_up([],0):-!.
 sum_list_up([H|T],Sum):-sum_list_up(T,Sum1),Sum is H+Sum1.
+
+%4
+list_el_numb(List,El,Num):-list_el_numb(List,El,0,Num).
+list_el_numb([H|_],H,Num,Num):-!.
+list_el_numb([_|T],El,I,Num):-I1 is I+1,list_el_numb(T,El,I1,Num).
+
+pr4_4:-write("kol-vo = "),read(N),read_list(N,List),write("Elem = "),read(El),list_el_numb(List,El,Num),write("Number = "),write(Num),write("."),!.
+pr4_4:-write("Nope.").
