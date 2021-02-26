@@ -64,3 +64,6 @@ del_all([],_,[]):-!.
 del_all([H|T],El,[H|T1]):-H\=El,del_all(T,El,T1),!.
 del_all([_|T],El,T1):-del_all(T,El,T1).
 
+%14
+only_one([]):-!.
+only_one([H|T]):-del_num([H|T],0,Res),not(in_list(Res,H)),only_one(Res).
