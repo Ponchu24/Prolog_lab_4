@@ -29,6 +29,10 @@ pr4_5:-write("kol-vo = "),read(N),read_list(N,List),write("Num = "),read(Num),li
 pr4_5:-write("Nope.").
 
 %6
-min_list_up([],_):-!.
-%min_list_up([H|T],_):-min_list_up([T],H),!.
-min_list_up([H|T],Min):-(H<Min -> min_list_up(T,H);min_list_up(T,Min)).
+min_list_up([H],H):-!.
+min_list_up([H|T],Min):-min_list_up(T,Min1),(H<Min1 -> Min is H;Min is Min1).
+
+%7
+min_list_down([],Min,Min):-!.
+min_list_down([H|T],Min):-min_list_down(T,Min,H),!.
+min_list_down([H|T],Min,Cur_min):-(H<Cur_min -> min_list_down(T,Min,H);min_list_down(T,Min,Cur_min)).
