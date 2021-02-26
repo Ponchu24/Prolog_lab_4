@@ -10,4 +10,3 @@ sum_list_down(L,S):-sum_list_down(L,0,S).
 sum_list_down([],S,S):-!.
 sum_list_down([H|T],Current_sum,Sum):-S1 is Current_sum+H,sum_list_down(T,S1,Sum).
 
-pr4_2:-write("kol-vo: "),read(N),read_list(N,List),sum_list_down(List,Sum),write(Sum).
