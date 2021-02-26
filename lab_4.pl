@@ -55,3 +55,6 @@ p(_,[],_):-!.
 p(_,Sublist,List):-Sublist=List,!.
 p([SH|ST],[Cur_SH|Cur_ST],[LH|LT]):-(Cur_SH=LH -> p([SH|ST],Cur_ST,LT);SH=Cur_SH,p([SH|ST],[Cur_SH|ST],LT)).
 
+%12
+del_num([_|T],0,T):-!.
+del_num([H|T],N,[H|T1]):-N1 is N-1,del_num(T,N1,T1).
