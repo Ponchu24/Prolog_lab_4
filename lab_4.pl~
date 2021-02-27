@@ -102,6 +102,11 @@ append1([H|T1],List2,[H|T2]):-append1(T1,List2,T2).
 
 swap_part([H|T],N1,N2,Res):-N1_1 is N1+1,N2_1 is N2-1,sublist([H|T],0,N1,SubStart),lenght([H|T],ListEnd),ListEnd1 is ListEnd-1,sublist([H|T],N2,ListEnd1,SubEnd),sublist([H|T],N1_1,N2_1,SubCenter),swap_list(SubCenter,SwapSubCenter),append1(SubStart,SwapSubCenter,Res1),append1(Res1,SubEnd,Res),!.
 
-p18_12_read:-write("Kol-vo = "),read(N),read_list(N,List),p18_12(List).
-p18_12([H|T]):-max_list_down([H|T],Max),min_list_down([H|T],Min),list_el_numb([H|T],Max,NumMax),list_el_numb([H|T],Min,NumMin),(NumMin is NumMax-1;NumMax is NumMin-1 -> p18_12_write([H|T]);(NumMin<NumMax -> swap_part([H|T],NumMin,NumMax,Res);swap_part([H|T],NumMax,NumMin,Res)),p18_12_write(Res)).
+p18_12:-write("Kol-vo = "),read(N),read_list(N,List),p18_12(List).
+p18_12([H|T]):-max_list_down([H|T],Max),min_list_down([H|T],Min),list_el_numb([H|T],Max,NumMax),list_el_numb([H|T],Min,NumMin),((NumMin is NumMax-1;NumMax is NumMin-1) -> p18_12_write([H|T]);(NumMin<NumMax -> swap_part([H|T],NumMin,NumMax,Res);swap_part([H|T],NumMax,NumMin,Res)),p18_12_write(Res)).
 p18_12_write(Res):-write("Result = "),write(Res),!.
+
+%18_21
+p18_21:-write("Kol-vo = "),read(N),read_list(N,List),p18_21(List).
+p18_21(List):-max_list_down(List,Max),list_el_numb(List,Max,Num),Num1 is Num-1,lenght(List,Lg),Lg1 is Lg-1,sublist(List,Num1,Lg1,Res),p18_21_write(Res).
+p18_21_write(Res):-write("Result = "),write(Res),!.
