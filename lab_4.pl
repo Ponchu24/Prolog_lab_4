@@ -129,3 +129,9 @@ p18_32([H|T],Res):-p18_32([H|T],H,0,0,Res).
 p18_32([],_,Cur_k,_,Cur_k):-p18_32_write(Cur_k),!.
 p18_32([H|T],Prev_H,Cur_k,Key,Res):-(Key is 0 -> (Prev_H<H -> Key1 is Key+1,p18_32(T,H,Cur_k,Key1,Res);p18_32(T,H,Cur_k,Key,Res));(Prev_H>H -> Key1 is Key-1,Cur_k1 is Cur_k+1,p18_32(T,H,Cur_k1,Key1,Res);p18_32(T,H,Cur_k,Key,Res))).
 p18_32_write(Res):-write("Result = "),write(Res),!.
+
+%18_35
+p18_35([H|T],R,Res):-p18_35(T,R,H,Res).
+p18_35([],_,Cur_res,Cur_res):-!.
+p18_35([H|T],R,Cur_res,Res):-(abs(R-H)<abs(R-Cur_res) -> p18_35(T,R,H,Res);p18_35(T,R,Cur_res,Res)).
+
