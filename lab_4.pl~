@@ -112,4 +112,20 @@ p18_21(List):-max_list_down(List,Max),list_el_numb(List,Max,Num),Num1 is Num+1,l
 p18_21_write(Res):-write("Result = "),write(Res),!.
 
 %18_23
-p18_23(List):-min_list_down(List,Min1),del_all(List,Min).
+p18_23:-write("Kol-vo = "),read(N),read_list(N,List),p18_23(List).
+p18_23(List):-min_list_down(List,Min1),del_all(List,Min1,List1),min_list_down(List1,Min2),p18_23_write(Min1,Min2).
+p18_23_write(Res1,Res2):-write("Min1 = "),write(Res1),nl,write("Min2 = "),write(Res2),!.
+
+%18_32
+% p18_32:-write("Kol-vo = "),read(N),read_list(N,List),write("Number of
+% start element = "),read(N1),write("Number of end element =
+% "),read(N2),p18_32(List,N1,N2).
+% p18_32(List,N1,N2):-sublist(List,N1,N2,List1),max_list_down(List1,Max),p18_32_write(Max).
+%
+%p18_32_write(Res):-write("Result = "),write(Res),!.
+
+p18_32_read:-write("Kol-vo = "),read(N),read_list(N,List),p18_32(List,_).
+p18_32([H|T],Res):-p18_32([H|T],H,0,0,Res).
+p18_32([],_,Cur_k,_,Cur_k):-!.
+p18_32([H|T],Prev_H,Cur_k,Key,Res):-(Key is 0 -> (Prev_H<H -> Key1 is Key+1,p18_32(T,H,Cur_k,Key1,Res);p18_32(T,H,Cur_k,Key,Res));(Prev_H>H -> Key1 is Key-1,Cur_k1 is Cur_k+1,p18_32(T,H,Cur_k1,Key1,Res);p18_32(T,H,Cur_k,Key,Res))).
+p18_32(Res):-write("Result = "),write(Res),!.
