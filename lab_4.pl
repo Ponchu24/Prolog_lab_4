@@ -87,3 +87,21 @@ p18_11:-write("Kol-vo = "),read(N),read_list(N,List),p18_11(List),!.
 p18_11([H|T]):-count([H|T],H,Kol),(Kol \= 1 -> del_all([H|T],H,Res),list_el_numb(Res,El,0);El is H),p18_11(El).
 p18_11(El):-write("Result = "),write(El).
 
+%18_12
+sublist([H|T],N1,N2,Res):-sublist([H|T],N1,N2,0,[],Res).
+sublist([],_,N2,I,Cur_res,Res):-I is N2+1,swap_list(Cur_res,Res),!.
+sublist([_|_],_,N2,I,Cur_res,Res):-I is N2+1,swap_list(Cur_res,Res),!.
+sublist([H|T],N1,N2,I,Cur_res,Res):-I1 is I+1,(I1=<N1 -> sublist(T,N1,N2,I1,Cur_res,Res);sublist(T,N1,N2,I1,[H|Cur_res],Res)).
+
+max_list_down([H|T],Max):-max_list_down(T,Max,H),!.
+max_list_down([],Max,Max):-!.
+max_list_down([H|T],Max,Cur_max):-(H>Cur_max -> max_list_down(T,Max,H);max_list_down(T,Max,Cur_max)).
+
+append1([],List2,List2).
+append1([H|T1],List2,[H|T2]):-append1(T1,List2,T2).
+
+swap_part([H|T],N1,N2,Res):-N1_1 is N1+1,N2_1 is N2-1,sublist([H|T],0,N1,SubStart),lenght([H|T],ListEnd),ListEnd1 is ListEnd-1,sublist([H|T],N2,ListEnd1,SubEnd),sublist([H|T],N1_1,N2_1,SubCenter),swap_list(SubCenter,SwapSubCenter),append1(SubStart,SwapSubCenter,Res1),append1(Res1,SubEnd,Res),!.
+
+p18_12_read:-write("Kol-vo = "),read(N),read_list(N,List),p18_12(List).
+p18_12([H|T]):-max_list_down([H|T],Max),min_list_down([H|T],Min),list_el_numb([H|T],Max,NumMax),list_el_numb([H|T],Min,NumMin),((NumMin is NumMax-1;NumMax is NumMin-1) -> p18_12_write([H|T]);(NumMin<NumMax -> swap_part([H|T],NumMin,NumMax,Res);swap_part([H|T],NumMax,NumMin,Res)),p18_12_write(Res)).
+p18_12_write(Res):-write("Result = "),write(Res),!.
