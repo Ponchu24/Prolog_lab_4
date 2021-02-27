@@ -110,3 +110,9 @@ p18_12_write(Res):-write("Result = "),write(Res),!.
 p18_21:-write("Kol-vo = "),read(N),read_list(N,List),p18_21(List).
 p18_21(List):-max_list_down(List,Max),list_el_numb(List,Max,Num),Num1 is Num+1,lenght(List,Lg),Lg1 is Lg-1,sublist(List,Num1,Lg1,Res),p18_21_write(Res).
 p18_21_write(Res):-write("Result = "),write(Res),!.
+
+%18_23
+p18_23:-write("Kol-vo = "),read(N),read_list(N,List),p18_23(List).
+p18_23(List):-min_list_down(List,Min1),del_all(List,Min1,List1),min_list_down(List1,Min2),p18_23_write(Min1,Min2).
+p18_23_write(Res1,Res2):-write("Min1 = "),write(Res1),nl,write("Min2 = "),write(Res2),!.
+
