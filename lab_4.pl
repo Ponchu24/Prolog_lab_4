@@ -131,7 +131,18 @@ p18_32([H|T],Prev_H,Cur_k,Key,Res):-(Key is 0 -> (Prev_H<H -> Key1 is Key+1,p18_
 p18_32_write(Res):-write("Result = "),write(Res),!.
 
 %18_35
-p18_35([H|T],R,Res):-p18_35(T,R,H,Res).
-p18_35([],_,Cur_res,Cur_res):-!.
-p18_35([H|T],R,Cur_res,Res):-(abs(R-H)<abs(R-Cur_res) -> p18_35(T,R,H,Res);p18_35(T,R,Cur_res,Res)).
+abs1(X,X):-X>=0,!.
+abs1(X,Y):-Y is 0-X.
 
+p18_35_read:-write("Kol-vo = "),read(N),read_list(N,List),write("Elem = "),read(N1),p18_35(List,N1,_).
+p18_35([H|T],R,Res):-p18_35(T,R,H,Res).
+p18_35([],_,Cur_res,Cur_res):-p18_35_write(Cur_res),!.
+p18_35([H|T],R,Cur_res,Res):-Diff1 is R-H,Diff2 is R-Cur_res,abs1(Diff1,Abs1),abs1(Diff2,Abs2),(Abs1<Abs2 -> p18_35(T,R,H,Res);p18_35(T,R,Cur_res,Res)).
+p18_35_write(Res):-write("Result = "),write(Res),!.
+
+%18_41
+p18_41_read:-write("Kol-vo = "),read(N),read_list(N,List),p18_41(List,_).
+p18_41(List,Res):-p18_41(List,0,0,Res),!.
+p18_41([],Sum,I,Res):-Res is Sum / I,p18_41_write(Res).
+p18_41([H|T],Sum,I,Res):-I1 is I+1,abs1(H,H_abs),Sum1 is Sum+H_abs,p18_41(T,Sum1,I1,Res).
+p18_41_write(Res):-write("Result = "),write(Res),!.
