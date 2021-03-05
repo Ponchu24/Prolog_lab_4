@@ -155,5 +155,18 @@ find_del(X,I,List,Res):-I1 is I+1,find_del(X,I1,List,Res).
 
 p18_47_read:-write("Kol-vo = "),read(N),read_list(N,List),p18_47(List,_).
 p18_47(List,Res):-p18_47(List,[],Res).
-p18_47([],Cur_res,Res):-make_only_one(Cur_res,Res),!.
+p18_47([],Cur_res,Res):-make_only_one(Cur_res,Res),p18_47_write(Res),!.
 p18_47([H|T],Cur_res,Res):-find_del(H,List),append1(Cur_res,List,Cur_res1),p18_47(T,Cur_res1,Res).
+p18_47_write(Res):-write("Result = "),write(Res),!.
+
+%18_59
+more_than_one(List,El):-more_than_one(List,El,0).
+more_than_one([],_,_):-!,fail.
+more_than_one([H|_],El,K):-El=H,K1 is K+1,K1>1.
+more_than_one([H|T],El,K):-El=H,K1 is K+1,more_than_one(T,El,K1),!.
+more_than_one([_|T],El,K):-more_than_one(T,El,K),!.
+
+p18_59(List,Res):-p18_59(List,[],Res).
+p18_59([],List,List):-!.
+p18_59([H|T],List,Res):-H>=0,H<100,more_than_one(T,H),del_all(T,H,T1),append1([H],List,List1),p18_59(T1,List1,Res),!.
+p18_59([_|T],List,Res):-p18_59(T,List,Res).
