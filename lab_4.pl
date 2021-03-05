@@ -166,7 +166,9 @@ more_than_one([H|_],El,K):-El=H,K1 is K+1,K1>1.
 more_than_one([H|T],El,K):-El=H,K1 is K+1,more_than_one(T,El,K1),!.
 more_than_one([_|T],El,K):-more_than_one(T,El,K),!.
 
+p18_59_read:-write("Kol-vo = "),read(N),read_list(N,List),p18_59(List,_).
 p18_59(List,Res):-p18_59(List,[],Res).
-p18_59([],List,List):-!.
+p18_59([],List,List):-p18_59_write(List),!.
 p18_59([H|T],List,Res):-H>=0,H<100,more_than_one(T,H),del_all(T,H,T1),H1 is H*H,append1([H1],List,List1),p18_59(T1,List1,Res),!.
 p18_59([_|T],List,Res):-p18_59(T,List,Res).
+p18_59_write(Res):-write("Result = "),write(Res),!.
