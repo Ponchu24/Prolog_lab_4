@@ -102,17 +102,17 @@ append1([H|T1],List2,[H|T2]):-append1(T1,List2,T2).
 
 swap_part([H|T],N1,N2,Res):-N1_1 is N1+1,N2_1 is N2-1,sublist([H|T],0,N1,SubStart),lenght([H|T],ListEnd),ListEnd1 is ListEnd-1,sublist([H|T],N2,ListEnd1,SubEnd),sublist([H|T],N1_1,N2_1,SubCenter),swap_list(SubCenter,SwapSubCenter),append1(SubStart,SwapSubCenter,Res1),append1(Res1,SubEnd,Res),!.
 
-p18_12:-write("Kol-vo = "),read(N),read_list(N,List),p18_12(List).
+p18_12_read:-write("Kol-vo = "),read(N),read_list(N,List),p18_12(List).
 p18_12([H|T]):-max_list_down([H|T],Max),min_list_down([H|T],Min),list_el_numb([H|T],Max,NumMax),list_el_numb([H|T],Min,NumMin),((NumMin is NumMax-1;NumMax is NumMin-1) -> p18_12_write([H|T]);(NumMin<NumMax -> swap_part([H|T],NumMin,NumMax,Res);swap_part([H|T],NumMax,NumMin,Res)),p18_12_write(Res)).
 p18_12_write(Res):-write("Result = "),write(Res),!.
 
 %18_21
-p18_21:-write("Kol-vo = "),read(N),read_list(N,List),p18_21(List).
+p18_21_read:-write("Kol-vo = "),read(N),read_list(N,List),p18_21(List).
 p18_21(List):-max_list_down(List,Max),list_el_numb(List,Max,Num),Num1 is Num+1,lenght(List,Lg),Lg1 is Lg-1,sublist(List,Num1,Lg1,Res),p18_21_write(Res).
 p18_21_write(Res):-write("Result = "),write(Res),!.
 
 %18_23
-p18_23:-write("Kol-vo = "),read(N),read_list(N,List),p18_23(List).
+p18_23_read:-write("Kol-vo = "),read(N),read_list(N,List),p18_23(List).
 p18_23(List):-min_list_down(List,Min1),del_all(List,Min1,List1),min_list_down(List1,Min2),p18_23_write(Min1,Min2).
 p18_23_write(Res1,Res2):-write("Min1 = "),write(Res1),nl,write("Min2 = "),write(Res2),!.
 
@@ -146,3 +146,15 @@ p18_41(List,Res):-p18_41(List,0,0,Res),!.
 p18_41([],Sum,I,Res):-Res is Sum / I,p18_41_write(Res).
 p18_41([H|T],Sum,I,Res):-I1 is I+1,abs1(H,H_abs),Sum1 is Sum+H_abs,p18_41(T,Sum1,I1,Res).
 p18_41_write(Res):-write("Result = "),write(Res),!.
+
+%18_47
+find_del(X,Res):-find_del(X,1,[],Res).
+find_del(X,X,List,[X|List]):-!.
+find_del(X,I,List,Res):-0 is X mod I,I1 is I+1,find_del(X,I1,[I|List],Res),!.
+find_del(X,I,List,Res):-I1 is I+1,find_del(X,I1,List,Res).
+
+p18_47_read:-write("Kol-vo = "),read(N),read_list(N,List),p18_47(List,_).
+p18_47(List,Res):-p18_47(List,[],Res).
+p18_47([],Cur_res,Res):-make_only_one(Cur_res,Res),p18_47_write(Res),!.
+p18_47([H|T],Cur_res,Res):-find_del(H,List),append1(Cur_res,List,Cur_res1),p18_47(T,Cur_res1,Res).
+p18_47_write(Res):-write("Result = "),write(Res),!.
